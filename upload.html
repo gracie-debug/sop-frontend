@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Upload SOP</title>
+</head>
+<body>
+  <h2>Upload SOP</h2>
+
+  <input type="file" id="file">
+  <button onclick="upload()">Upload</button>
+
+  <div id="msg"></div>
+
+  <script>
+    async function upload() {
+      const file = document.getElementById("file").files[0];
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const res = await fetch("https://sop-backend-2dvb.onrender.com", {
+        method: "POST",
+        body: formData
+      });
+
+      const r = await res.json();
+      document.getElementById("msg").innerText = r.status;
+    }
+  </script>
+</body>
+</html>
