@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,17 +15,25 @@
   <script>
     async function search() {
       const q = document.getElementById("q").value;
-      const res = await fetch("https://sop-backend-2dvb.onrender.com/search?q=" + encodeURIComponent(q));
+      if (!q) {
+        alert("Type something to search.");
+        return;
+      }
+
+      const res = await fetch("[sop-backend-2dvb.onrender.com](https://sop-backend-2dvb.onrender.com/search?q=)" + encodeURIComponent(q));
       const data = await res.json();
 
       let html = "";
       data.forEach(sop => {
-        html += `<h3>${sop.title}</h3><p>${sop.content.substring(0,300)}...</p><hr>`;
+        html += `
+          <h3>${sop.title}</h3>
+          <p>${sop.content.substring(0,300)}...</p>
+          <hr>
+        `;
       });
 
-      document.getElementById("results").innerHTML = html;
+      document.getElementById("results").innerHTML = html || "<p>No results found.</p>";
     }
   </script>
 </body>
 </html>
-

@@ -15,16 +15,20 @@
   <script>
     async function upload() {
       const file = document.getElementById("file").files[0];
+      if (!file) {
+        alert("Please select a file first.");
+        return;
+      }
       const formData = new FormData();
       formData.append("file", file);
 
-      const res = await fetch("https://sop-backend-2dvb.onrender.com", {
+      const res = await fetch("[sop-backend-2dvb.onrender.com](https://sop-backend-2dvb.onrender.com/upload)", {
         method: "POST",
         body: formData
       });
 
       const r = await res.json();
-      document.getElementById("msg").innerText = r.status;
+      document.getElementById("msg").innerText = r.status || "Uploaded";
     }
   </script>
 </body>
