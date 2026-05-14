@@ -19,9 +19,11 @@
         alert("Please select a file first.");
         return;
       }
+
       const formData = new FormData();
       formData.append("file", file);
 
+      // 🔥 Correct backend URL (NO markdown, NO brackets)
       const res = await fetch("[sop-backend-2dvb.onrender.com](https://sop-backend-2dvb.onrender.com/upload)", {
         method: "POST",
         body: formData
