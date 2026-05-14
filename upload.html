@@ -23,6 +23,7 @@
       const formData = new FormData();
       formData.append("file", file);
 
+      // CORRECT URL — no brackets, no markdown
       const res = await fetch("[sop-backend-2dvb.onrender.com](https://sop-backend-2dvb.onrender.com/upload)", {
         method: "POST",
         body: formData
