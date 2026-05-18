@@ -6,12 +6,9 @@
 </head>
 <body>
   <h2>Upload SOP</h2>
-
   <input type="file" id="file">
   <button onclick="upload()">Upload</button>
-
   <div id="msg"></div>
-
   <script>
     async function upload() {
       const file = document.getElementById("file").files[0];
@@ -19,16 +16,14 @@
         alert("Please select a file first.");
         return;
       }
-
       const formData = new FormData();
       formData.append("file", file);
-
-      // CORRECT URL — no brackets, no markdown
-      const res = await fetch("[sop-backend-2dvb.onrender.com](https://sop-backend-2dvb.onrender.com/upload)", {
+      // URL split so GitHub cannot break it
+      const url = "https://" + "sop-backend-2dvb" + ".onrender.com" + "/upload";
+      const res = await fetch(url, {
         method: "POST",
         body: formData
       });
-
       const r = await res.json();
       document.getElementById("msg").innerText = r.status || "Uploaded";
     }
